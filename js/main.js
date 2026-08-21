@@ -1,5 +1,6 @@
 /**
  * PixaPDF Landing Page - Interactive JavaScript Controller
+ * Real Browser Conversion Engine & 2-Trial Limit Redirection
  */
 
 document.addEventListener('DOMContentLoaded', () => {
@@ -106,7 +107,7 @@ function initFAQAccordion() {
 }
 
 /* --------------------------------------------------
- * 5. Interactive Feature Simulator (Browser Demo)
+ * 5. Interactive Feature Simulator (Real Engine + 2 Trial Limit)
  * -------------------------------------------------- */
 function initSimulator() {
   const tabImgToPdf = document.getElementById('tabImgToPdf');
@@ -115,8 +116,14 @@ function initSimulator() {
   const simFileInput = document.getElementById('simFileInput');
   const simPreviewArea = document.getElementById('simPreviewArea');
   const simResultContent = document.getElementById('simResultContent');
+  const trialCountText = document.getElementById('trialCountText');
+  const trialCounterBadge = document.getElementById('trialCounterBadge');
 
   if (!simDropzone || !simFileInput) return;
+
+  const MAX_FREE_TRIALS = 2;
+  let trialCount = parseInt(localStorage.getItem('pixapdf_sim_trials') || '0', 10);
+  updateTrialUI();
 
   let activeMode = 'img2pdf'; // 'img2pdf' or 'ocr'
 
@@ -136,11 +143,19 @@ function initSimulator() {
     });
   }
 
-  simDropzone.addEventListener('click', () => simFileInput.click());
+  simDropzone.addEventListener('click', () => {
+    if (trialCount >= MAX_FREE_TRIALS) {
+      showLimitReachedScreen();
+    } else {
+      simFileInput.click();
+    }
+  });
 
   simDropzone.addEventListener('dragover', (e) => {
     e.preventDefault();
-    simDropzone.style.borderColor = 'var(--primary)';
+    if (trialCount < MAX_FREE_TRIALS) {
+      simDropzone.style.borderColor = 'var(--primary)';
+    }
   });
 
   simDropzone.addEventListener('dragleave', () => {
@@ -150,70 +165,230 @@ function initSimulator() {
   simDropzone.addEventListener('drop', (e) => {
     e.preventDefault();
     simDropzone.style.borderColor = 'var(--border-glow)';
-    if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
+    if (trialCount >= MAX_FREE_TRIALS) {
+      showLimitReachedScreen();
+    } else if (e.dataTransfer.files && e.dataTransfer.files.length > 0) {
       handleFiles(e.dataTransfer.files);
     }
   });
 
   simFileInput.addEventListener('change', (e) => {
     if (e.target.files && e.target.files.length > 0) {
-      handleFiles(e.target.files);
+      if (trialCount >= MAX_FREE_TRIALS) {
+        showLimitReachedScreen();
+      } else {
+        handleFiles(e.target.files);
+      }
     }
   });
 
+  function updateTrialUI() {
+    if (trialCountText) {
+      trialCountText.innerText = trialCount;
+    }
+    if (trialCounterBadge) {
+      if (trialCount >= MAX_FREE_TRIALS) {
+        trialCounterBadge.style.background = 'rgba(239, 68, 68, 0.2)';
+        trialCounterBadge.style.color = '#ef4444';
+        trialCounterBadge.style.borderColor = 'rgba(239, 68, 68, 0.4)';
+        trialCounterBadge.innerHTML = '<i class="fa-solid fa-lock"></i> Free Trial Limit Reached (2/2)';
+      }
+    }
+  }
+
   function resetSimulator() {
-    simPreviewArea.classList.remove('active');
-    simResultContent.innerHTML = '';
+    if (trialCount >= MAX_FREE_TRIALS) {
+      showLimitReachedScreen();
+    } else {
+      simPreviewArea.classList.remove('active');
+      simResultContent.innerHTML = '';
+    }
+  }
+
+  function showLimitReachedScreen() {
+    simPreviewArea.classList.add('active');
+    simResultContent.innerHTML = `
+      <div style="background: var(--bg-card); border: 2px dashed var(--primary); padding: 2.25rem 1.5rem; border-radius: var(--radius-lg); text-align: center;">
+        <div style="width: 56px; height: 56px; background: rgba(255,59,48,0.15); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem auto; color: var(--primary); font-size: 1.5rem;">
+          <i class="fa-solid fa-lock"></i>
+        </div>
+        <h3 style="font-size: 1.35rem; font-weight: 800; margin-bottom: 0.5rem; color: var(--text-main);">Free Browser Trial Limit Reached (2/2)</h3>
+        <p style="color: var(--text-muted); font-size: 0.95rem; max-width: 520px; margin: 0 auto 1.5rem auto; line-height: 1.6;">
+          You have used your 2 free browser trial conversions. To process unlimited PDF documents, scan files, and perform AI OCR 100% offline, download the full PixaPDF app on Google Play Store!
+        </p>
+        <a href="https://play.google.com/store/apps/details?id=com.onewanta.files_tools" target="_blank" class="playstore-badge" style="display: inline-flex; padding: 0.85rem 2rem;">
+          <svg viewBox="0 0 512 512" fill="currentColor" style="width: 28px; height: 28px;">
+            <path d="M99.617 8.057a50.091 50.091 0 00-38.867 18.24L267.143 256 60.75 485.703a50.08 50.08 0 0038.867 18.24 50.04 50.04 0 0021.054-4.606l270.932-135.466 2.378-1.189L120.67 12.663a50.05 50.05 0 00-21.053-4.606zM32.8 38.35A49.88 49.88 0 0016 74.07v363.86c0 14.15 5.92 26.92 16.8 35.72L235.8 256 32.8 38.35zm389.043 189.624l-48.435-24.218L298.49 256l74.918 52.244 48.435-24.218c18.57-9.285 30.157-27.818 30.157-48.051s-11.587-38.766-30.157-48.051z" />
+          </svg>
+          <div class="playstore-text">
+            <span style="font-size: 0.75rem;">GET UNLIMITED ACCESS ON</span>
+            <span style="font-size: 1.15rem;">Google Play Store</span>
+          </div>
+        </a>
+      </div>
+    `;
   }
 
   function handleFiles(files) {
+    if (trialCount >= MAX_FREE_TRIALS) {
+      showLimitReachedScreen();
+      return;
+    }
+
     const file = files[0];
+    if (!file.type.startsWith('image/')) {
+      showToast('Please select a valid image file (JPG, PNG, WEBP)');
+      return;
+    }
+
     simPreviewArea.classList.add('active');
+
+    // Increment trial count
+    trialCount += 1;
+    localStorage.setItem('pixapdf_sim_trials', trialCount.toString());
+    updateTrialUI();
 
     simResultContent.innerHTML = `
       <div style="text-align: center; padding: 1.5rem;">
         <i class="fa-solid fa-spinner fa-spin" style="font-size: 2rem; color: var(--primary);"></i>
-        <p style="margin-top: 0.75rem; font-weight: 600;">Processing ${file.name}...</p>
+        <p style="margin-top: 0.75rem; font-weight: 600;">Processing ${file.name} in Real Browser Engine...</p>
       </div>
     `;
 
-    setTimeout(() => {
-      if (activeMode === 'img2pdf') {
+    if (activeMode === 'img2pdf') {
+      createRealPdfFromImage(file, (pdfBlob) => {
         const simulatedPdfName = file.name.substring(0, file.name.lastIndexOf('.')) + '_PixaPDF.pdf';
+        const pdfUrl = URL.createObjectURL(pdfBlob);
+        const fileSizeKb = (pdfBlob.size / 1024).toFixed(1);
+
         simResultContent.innerHTML = `
           <div class="sim-result-card">
             <div style="display: flex; align-items: center; gap: 1rem;">
-              <i class="fa-solid fa-file-pdf" style="font-size: 2rem; color: var(--primary);"></i>
+              <i class="fa-solid fa-file-pdf" style="font-size: 2.2rem; color: var(--primary);"></i>
               <div>
                 <strong style="display: block;">${simulatedPdfName}</strong>
-                <small style="color: var(--text-muted);">PDF Document • Ready (HD Quality)</small>
+                <small style="color: var(--text-muted);">PDF Document • ${fileSizeKb} KB • Real PDF Output</small>
               </div>
             </div>
-            <button class="btn btn-primary" onclick="showToast('Simulator demo: In PixaPDF app files are saved 100% offline on your device!')">
-              <i class="fa-solid fa-download"></i> Download PDF
-            </button>
+            <a href="${pdfUrl}" download="${simulatedPdfName}" class="btn btn-primary" id="downloadPdfBtn">
+              <i class="fa-solid fa-download"></i> Download Real PDF
+            </a>
           </div>
+          ${trialCount >= MAX_FREE_TRIALS ? `
+            <p style="margin-top: 1rem; color: #ef4444; font-size: 0.85rem; font-weight: 700; text-align: center;">
+              <i class="fa-solid fa-triangle-exclamation"></i> You have used all ${MAX_FREE_TRIALS} free browser trial conversions! <a href="https://play.google.com/store/apps/details?id=com.onewanta.files_tools" target="_blank" style="text-decoration: underline;">Get full Android app for unlimited processing</a>.
+            </p>
+          ` : ''}
         `;
-      } else {
-        // OCR mode simulation
+
+        document.getElementById('downloadPdfBtn').addEventListener('click', () => {
+          showToast('Downloading your real PDF file!');
+        });
+      });
+    } else {
+      // OCR mode simulation
+      setTimeout(() => {
         simResultContent.innerHTML = `
           <div style="background: var(--bg-surface); padding: 1.25rem; border-radius: var(--radius-md); border: 1px solid var(--border-color);">
-            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
+            <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem; flex-wrap: wrap; gap: 0.5rem;">
               <strong style="color: var(--primary);"><i class="fa-solid fa-microchip"></i> Text Extracted Successfully (PixaPDF AI OCR):</strong>
-              <button class="btn btn-secondary" style="padding: 0.3rem 0.8rem; font-size: 0.8rem;" onclick="navigator.clipboard.writeText('Sample text extracted by PixaPDF OCR...'); showToast('Text copied successfully!');">
+              <button class="btn btn-secondary" id="copyOcrTextBtn" style="padding: 0.3rem 0.8rem; font-size: 0.88rem;">
                 <i class="fa-solid fa-copy"></i> Copy Text
               </button>
             </div>
-            <p style="font-family: monospace; font-size: 0.9rem; color: var(--text-main); line-height: 1.5; background: rgba(0,0,0,0.2); padding: 1rem; border-radius: 8px;">
+            <p id="ocrTextOutput" style="font-family: monospace; font-size: 0.9rem; color: var(--text-main); line-height: 1.5; background: rgba(0,0,0,0.2); padding: 1rem; border-radius: 8px;">
               [PIXAPDF OCR RESULT DEMO]<br>
               Document: ${file.name}<br>
               "PixaPDF allows you to convert images into high-quality PDF files, extract text automatically with AI OCR, and secure documents offline without an internet connection."
             </p>
           </div>
+          ${trialCount >= MAX_FREE_TRIALS ? `
+            <p style="margin-top: 1rem; color: #ef4444; font-size: 0.85rem; font-weight: 700; text-align: center;">
+              <i class="fa-solid fa-triangle-exclamation"></i> You have used all ${MAX_FREE_TRIALS} free browser trial conversions! <a href="https://play.google.com/store/apps/details?id=com.onewanta.files_tools" target="_blank" style="text-decoration: underline;">Get full Android app for unlimited OCR</a>.
+            </p>
+          ` : ''}
         `;
-      }
-    }, 1200);
+
+        document.getElementById('copyOcrTextBtn').addEventListener('click', () => {
+          const txt = document.getElementById('ocrTextOutput').innerText;
+          navigator.clipboard.writeText(txt);
+          showToast('Extracted OCR text copied to clipboard!');
+        });
+      }, 1000);
+    }
   }
+}
+
+/* Pure JavaScript Real PDF Creator for JPEG/PNG/WEBP Images */
+function createRealPdfFromImage(file, callback) {
+  const reader = new FileReader();
+  reader.onload = (e) => {
+    const img = new Image();
+    img.onload = () => {
+      const canvas = document.createElement('canvas');
+      canvas.width = img.width;
+      canvas.height = img.height;
+      const ctx = canvas.getContext('2d');
+      ctx.drawImage(img, 0, 0);
+
+      const jpegUrl = canvas.toDataURL('image/jpeg', 0.92);
+      const base64Data = jpegUrl.split(',')[1];
+      const binaryStr = atob(base64Data);
+      const imgLen = binaryStr.length;
+      const imgBytes = new Uint8Array(imgLen);
+      for (let i = 0; i < imgLen; i++) {
+        imgBytes[i] = binaryStr.charCodeAt(i);
+      }
+
+      const pdfW = (img.width * 0.75).toFixed(2);
+      const pdfH = (img.height * 0.75).toFixed(2);
+
+      const header = `%PDF-1.4\n`;
+      const obj1 = `1 0 obj\n<< /Type /Catalog /Pages 2 0 R >>\nendobj\n`;
+      const obj2 = `2 0 obj\n<< /Type /Pages /Kids [3 0 R] /Count 1 >>\nendobj\n`;
+      const obj3 = `3 0 obj\n<< /Type /Page /Parent 2 0 R /MediaBox [0 0 ${pdfW} ${pdfH}] /Resources << /XObject << /Im1 4 0 R >> >> /Contents 5 0 R >>\nendobj\n`;
+      const obj4Head = `4 0 obj\n<< /Type /XObject /Subtype /Image /Width ${img.width} /Height ${img.height} /ColorSpace /DeviceRGB /BitsPerComponent 8 /Filter /DCTDecode /Length ${imgLen} >>\nstream\n`;
+      const obj4Tail = `\nendstream\nendobj\n`;
+      
+      const contentStr = `q ${pdfW} 0 0 ${pdfH} 0 0 cm /Im1 Do Q`;
+      const obj5 = `5 0 obj\n<< /Length ${contentStr.length} >>\nstream\n${contentStr}\nendstream\nendobj\n`;
+
+      const encoder = new TextEncoder();
+      const parts = [
+        encoder.encode(header),
+        encoder.encode(obj1),
+        encoder.encode(obj2),
+        encoder.encode(obj3),
+        encoder.encode(obj4Head),
+        imgBytes,
+        encoder.encode(obj4Tail),
+        encoder.encode(obj5)
+      ];
+
+      let pos = header.length;
+      const offsets = [0];
+      offsets.push(pos); pos += obj1.length;
+      offsets.push(pos); pos += obj2.length;
+      offsets.push(pos); pos += obj3.length;
+      offsets.push(pos); pos += obj4Head.length + imgLen + obj4Tail.length;
+      offsets.push(pos);
+
+      let xref = `xref\n0 6\n0000000000 65535 f \n`;
+      for (let i = 1; i <= 5; i++) {
+        xref += (offsets[i] + '').padStart(10, '0') + ` 00000 n \n`;
+      }
+      const startXref = pos + obj5.length;
+      const trailer = `trailer\n<< /Size 6 /Root 1 0 R >>\nstartxref\n${startXref}\n%%EOF`;
+
+      parts.push(encoder.encode(xref));
+      parts.push(encoder.encode(trailer));
+
+      const pdfBlob = new Blob(parts, { type: 'application/pdf' });
+      callback(pdfBlob);
+    };
+    img.src = e.target.result;
+  };
+  reader.readAsDataURL(file);
 }
 
 /* --------------------------------------------------

@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="id" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Verifikasi Google app-ads.txt — PixaPDF</title>
+  <meta name="description" content="File verifikasi resmi pengembang Google AdMob untuk aplikasi PixaPDF sesuai standar AdMob Publisher.">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="shortcut icon" href="assets/images/logo.png" type="image/png">
+</head>
+<body>
+
+  <!-- Header -->
+  <header class="header scrolled">
+    <div class="container nav-container">
+      <a href="index.html" class="logo-brand">
+        <img src="assets/images/logo.png" alt="PixaPDF Logo">
+        <span>Pixa<span class="gradient-text">PDF</span></span>
+      </a>
+      <div class="nav-actions">
+        <a href="index.html" class="btn btn-secondary"><i class="fa-solid fa-arrow-left"></i> Kembali ke Beranda</a>
+        <button class="theme-btn" id="themeToggleBtn" title="Toggle Theme">
+          <i class="fa-solid fa-sun"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main style="padding-top: 120px; padding-bottom: 80px;">
+    <div class="container" style="max-width: 900px;">
+      <div style="background: var(--bg-card); padding: 2.5rem; border-radius: var(--radius-lg); border: 1px solid var(--border-color); box-shadow: var(--shadow-lg);">
+        <div class="section-badge"><i class="fa-solid fa-rectangle-ad"></i> AdMob Monetization</div>
+        <h1 style="font-size: 2.25rem; font-weight: 800; margin-bottom: 1rem;">Berkas app-ads.txt PixaPDF</h1>
+        <p style="color: var(--text-muted); margin-bottom: 2rem;">
+          File verifikasi resmi pengembang Google AdMob untuk aplikasi PixaPDF sesuai standar AdMob Publisher.
+        </p>
+
+        <div style="color: var(--text-muted); line-height: 1.8;">
+          <p>
+            Pengembang aplikasi dapat menempatkan file <code style="color: var(--primary);">app-ads.txt</code> ini di
+            direktori akar domain (root level domain) website resmi ini:
+          </p>
+
+          <div class="code-box" style="margin: 1.5rem 0;">
+            <pre id="adsTxtSnippet">google.com, pub-0000000000000000, DIRECT, f08c47fec0942fa0</pre>
+          </div>
+
+          <div style="display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 2rem;">
+            <button class="btn btn-primary" id="copyAdsTxtBtn">
+              <i class="fa-solid fa-copy"></i> Salin Snippet
+            </button>
+            <a href="app-ads.txt" target="_blank" class="btn btn-secondary">
+              <i class="fa-solid fa-external-link"></i> Buka File app-ads.txt
+            </a>
+          </div>
+
+          <h3 style="color: var(--text-main); margin-top: 1.5rem; margin-bottom: 0.5rem;">Tentang Standard app-ads.txt</h3>
+          <p>
+            Standard <strong>Authorized Digital Sellers for Mobile Apps (app-ads.txt)</strong> dirancang oleh IAB Tech Lab untuk membantu mencegah penipuan inventaris iklan dan memastikan bahwa iklan yang ditayangkan pada aplikasi PixaPDF berasal dari penjual iklan resmi.
+          </p>
+
+          <h3 style="color: var(--text-main); margin-top: 1.5rem; margin-bottom: 0.5rem;">Lokasi Berkas Publikasi</h3>
+          <p>
+            Crawler Google AdMob secara otomatis memindai domain yang terdaftar di Google Play Store pada jalur default:
+          </p>
+          <p style="background: var(--bg-surface); padding: 0.75rem 1rem; border-radius: var(--radius-sm); border: 1px solid var(--border-color); font-family: monospace; color: var(--primary); margin-top: 0.5rem;">
+            https://pixapdf.com/app-ads.txt
+          </p>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container text-center">
+      <p>&copy; 2026 PixaPDF. All rights reserved.</p>
+    </div>
+  </footer>
+
+  <script src="js/main.js"></script>
+</body>
+</html>

@@ -22,7 +22,7 @@
   /* Brand Colors */
   --primary: #FF3B30;
   --primary-hover: #E02828;
-  --primary-gradient: linear-gradient(135deg, #FF3B30 0%, #FF6B00 100%);
+  --primary-gradient: linear-gradient(135deg, #FF3B30 0%, #B91C1C 100%);
   --secondary: #6366F1;
   --secondary-gradient: linear-gradient(135deg, #6366F1 0%, #8B5CF6 100%);
   --accent-teal: #10B981;

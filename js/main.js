@@ -173,7 +173,7 @@ function initSimulator() {
     simResultContent.innerHTML = `
       <div style="text-align: center; padding: 1.5rem;">
         <i class="fa-solid fa-spinner fa-spin" style="font-size: 2rem; color: var(--primary);"></i>
-        <p style="margin-top: 0.75rem; font-weight: 600;">Memproses ${file.name}...</p>
+        <p style="margin-top: 0.75rem; font-weight: 600;">Processing ${file.name}...</p>
       </div>
     `;
 
@@ -189,8 +189,8 @@ function initSimulator() {
                 <small style="color: var(--text-muted);">PDF Document • Ready (HD Quality)</small>
               </div>
             </div>
-            <button class="btn btn-primary" onclick="showToast('Fitur simulator: Di aplikasi PixaPDF file langsung tersimpan offline di HP Anda!')">
-              <i class="fa-solid fa-download"></i> Unduh PDF
+            <button class="btn btn-primary" onclick="showToast('Simulator demo: In PixaPDF app files are saved 100% offline on your device!')">
+              <i class="fa-solid fa-download"></i> Download PDF
             </button>
           </div>
         `;
@@ -199,15 +199,15 @@ function initSimulator() {
         simResultContent.innerHTML = `
           <div style="background: var(--bg-surface); padding: 1.25rem; border-radius: var(--radius-md); border: 1px solid var(--border-color);">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.75rem;">
-              <strong style="color: var(--primary);"><i class="fa-solid fa-microchip"></i> Teks Berhasil Diekstrak (OCR PixaPDF AI):</strong>
-              <button class="btn btn-secondary" style="padding: 0.3rem 0.8rem; font-size: 0.8rem;" onclick="navigator.clipboard.writeText('Contoh teks hasil scan OCR PixaPDF...'); showToast('Teks berhasil disalin!');">
-                <i class="fa-solid fa-copy"></i> Salin Teks
+              <strong style="color: var(--primary);"><i class="fa-solid fa-microchip"></i> Text Extracted Successfully (PixaPDF AI OCR):</strong>
+              <button class="btn btn-secondary" style="padding: 0.3rem 0.8rem; font-size: 0.8rem;" onclick="navigator.clipboard.writeText('Sample text extracted by PixaPDF OCR...'); showToast('Text copied successfully!');">
+                <i class="fa-solid fa-copy"></i> Copy Text
               </button>
             </div>
             <p style="font-family: monospace; font-size: 0.9rem; color: var(--text-main); line-height: 1.5; background: rgba(0,0,0,0.2); padding: 1rem; border-radius: 8px;">
-              [DEMO HASIL OCR PIXAPDF]<br>
-              Dokumen: ${file.name}<br>
-              "PixaPDF memungkinkan Anda mengonversi gambar menjadi file PDF berkualitas tinggi, mengekstrak teks otomatis (OCR), serta mengamankan dokumen tanpa koneksi internet."
+              [PIXAPDF OCR RESULT DEMO]<br>
+              Document: ${file.name}<br>
+              "PixaPDF allows you to convert images into high-quality PDF files, extract text automatically with AI OCR, and secure documents offline without an internet connection."
             </p>
           </div>
         `;
@@ -228,19 +228,17 @@ function initAdsTxtCopy() {
   copyBtn.addEventListener('click', () => {
     const textToCopy = codeContent.innerText;
     navigator.clipboard.writeText(textToCopy).then(() => {
-      showToast('Isi app-ads.txt berhasil disalin!');
-      copyBtn.innerHTML = '<i class="fa-solid fa-check"></i> Tersalin!';
+      showToast('app-ads.txt content copied successfully!');
+      copyBtn.innerHTML = '<i class="fa-solid fa-check"></i> Copied!';
       setTimeout(() => {
-        copyBtn.innerHTML = '<i class="fa-solid fa-copy"></i> Salin Snippet';
+        copyBtn.innerHTML = '<i class="fa-solid fa-copy"></i> Copy Snippet';
       }, 2000);
     });
   });
 }
 
-
-
 /* --------------------------------------------------
- * 8. Contact Form Handling
+ * 7. Contact Form Handling
  * -------------------------------------------------- */
 function initContactForm() {
   const form = document.getElementById('contactForm');
@@ -248,7 +246,7 @@ function initContactForm() {
 
   form.addEventListener('submit', (e) => {
     e.preventDefault();
-    showToast('Pesan Anda berhasil dikirim! Tim PixaPDF akan merespons melalui email.');
+    showToast('Your message has been sent! The PixaPDF team will respond via email.');
     form.reset();
   });
 }

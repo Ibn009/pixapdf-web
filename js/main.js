@@ -188,10 +188,10 @@ function initSimulator() {
     }
     if (trialCounterBadge) {
       if (trialCount >= MAX_FREE_TRIALS) {
-        trialCounterBadge.style.background = 'rgba(239, 68, 68, 0.2)';
-        trialCounterBadge.style.color = '#ef4444';
-        trialCounterBadge.style.borderColor = 'rgba(239, 68, 68, 0.4)';
-        trialCounterBadge.innerHTML = '<i class="fa-solid fa-lock"></i> Free Trial Limit Reached (2/2)';
+        trialCounterBadge.style.background = 'var(--primary-gradient)';
+        trialCounterBadge.style.color = '#ffffff';
+        trialCounterBadge.style.borderColor = 'transparent';
+        trialCounterBadge.innerHTML = '<i class="fa-solid fa-mobile-screen-button"></i> Get App on Google Play Store';
       }
     }
   }
@@ -208,20 +208,20 @@ function initSimulator() {
   function showLimitReachedScreen() {
     simPreviewArea.classList.add('active');
     simResultContent.innerHTML = `
-      <div style="background: var(--bg-card); border: 2px dashed var(--primary); padding: 2.25rem 1.5rem; border-radius: var(--radius-lg); text-align: center;">
-        <div style="width: 56px; height: 56px; background: rgba(255,59,48,0.15); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1rem auto; color: var(--primary); font-size: 1.5rem;">
-          <i class="fa-solid fa-lock"></i>
+      <div style="background: var(--bg-card); border: 2px dashed var(--border-glow); padding: 2.25rem 1.5rem; border-radius: var(--radius-lg); text-align: center;">
+        <div style="width: 60px; height: 60px; background: var(--primary-gradient); border-radius: 50%; display: flex; align-items: center; justify-content: center; margin: 0 auto 1.25rem auto; color: #FFF; font-size: 1.6rem; box-shadow: var(--shadow-primary);">
+          <i class="fa-solid fa-rocket"></i>
         </div>
-        <h3 style="font-size: 1.35rem; font-weight: 800; margin-bottom: 0.5rem; color: var(--text-main);">Free Browser Trial Limit Reached (2/2)</h3>
-        <p style="color: var(--text-muted); font-size: 0.95rem; max-width: 520px; margin: 0 auto 1.5rem auto; line-height: 1.6;">
-          You have used your 2 free browser trial conversions. To process unlimited PDF documents, scan files, and perform AI OCR 100% offline, download the full PixaPDF app on Google Play Store!
+        <h3 style="font-size: 1.4rem; font-weight: 800; margin-bottom: 0.5rem; color: var(--text-main);">Unlock Unlimited PDF Powers on Android!</h3>
+        <p style="color: var(--text-muted); font-size: 0.98rem; max-width: 540px; margin: 0 auto 1.5rem auto; line-height: 1.6;">
+          Loved the browser preview? Download the full <strong>PixaPDF App</strong> on Google Play Store to experience <strong>unlimited offline PDF conversion, document scanning, digital signatures, and AI OCR</strong> with zero restrictions!
         </p>
         <a href="https://play.google.com/store/apps/details?id=com.onewanta.files_tools" target="_blank" class="playstore-badge" style="display: inline-flex; padding: 0.85rem 2rem;">
           <svg viewBox="0 0 512 512" fill="currentColor" style="width: 28px; height: 28px;">
             <path d="M99.617 8.057a50.091 50.091 0 00-38.867 18.24L267.143 256 60.75 485.703a50.08 50.08 0 0038.867 18.24 50.04 50.04 0 0021.054-4.606l270.932-135.466 2.378-1.189L120.67 12.663a50.05 50.05 0 00-21.053-4.606zM32.8 38.35A49.88 49.88 0 0016 74.07v363.86c0 14.15 5.92 26.92 16.8 35.72L235.8 256 32.8 38.35zm389.043 189.624l-48.435-24.218L298.49 256l74.918 52.244 48.435-24.218c18.57-9.285 30.157-27.818 30.157-48.051s-11.587-38.766-30.157-48.051z" />
           </svg>
           <div class="playstore-text">
-            <span style="font-size: 0.75rem;">GET UNLIMITED ACCESS ON</span>
+            <span style="font-size: 0.75rem;">DOWNLOAD FREE ON</span>
             <span style="font-size: 1.15rem;">Google Play Store</span>
           </div>
         </a>
@@ -275,8 +275,8 @@ function initSimulator() {
             </a>
           </div>
           ${trialCount >= MAX_FREE_TRIALS ? `
-            <p style="margin-top: 1rem; color: #ef4444; font-size: 0.85rem; font-weight: 700; text-align: center;">
-              <i class="fa-solid fa-triangle-exclamation"></i> You have used all ${MAX_FREE_TRIALS} free browser trial conversions! <a href="https://play.google.com/store/apps/details?id=com.onewanta.files_tools" target="_blank" style="text-decoration: underline;">Get full Android app for unlimited processing</a>.
+            <p style="margin-top: 1.25rem; color: var(--text-main); font-size: 0.9rem; font-weight: 600; text-align: center;">
+              <i class="fa-solid fa-wand-magic-sparkles" style="color: var(--primary);"></i> Want unlimited offline conversions & digital signatures? <a href="https://play.google.com/store/apps/details?id=com.onewanta.files_tools" target="_blank" style="color: var(--primary); font-weight: 700; text-decoration: underline;">Download PixaPDF on Google Play Store &rarr;</a>
             </p>
           ` : ''}
         `;

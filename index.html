@@ -17,8 +17,9 @@
   <meta property="og:image" content="assets/images/hero_mockup.png">
   <meta property="og:type" content="website">
 
-  <!-- Font Awesome Icons & Custom Stylesheet -->
+  <!-- Font Awesome Icons, Tesseract.js OCR & Custom Stylesheet -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
   <link rel="stylesheet" href="css/style.css">
   <link rel="shortcut icon" href="assets/images/pixa_pdf_logo.png" type="image/png">
 </head>
@@ -38,8 +39,28 @@
       <ul class="nav-menu" id="navMenu">
         <li><a href="#home" class="nav-link active">Home</a></li>
         <li><a href="#about" class="nav-link">About</a></li>
-        <li><a href="#features" class="nav-link">Features</a></li>
-        <li><a href="#simulator" class="nav-link">Live Demo</a></li>
+        <li class="nav-dropdown" id="featuresDropdown">
+          <a href="#features" class="nav-link dropdown-toggle">
+            Features <i class="fa-solid fa-chevron-down dropdown-chevron"></i>
+          </a>
+          <ul class="dropdown-menu">
+            <li class="dropdown-item">
+              <a href="#features" class="dropdown-link">
+                <i class="fa-solid fa-cubes"></i> Key Features
+              </a>
+            </li>
+            <li class="dropdown-item">
+              <a href="#showcase" class="dropdown-link">
+                <i class="fa-solid fa-mobile-screen-button"></i> Mobile Showcase
+              </a>
+            </li>
+            <li class="dropdown-item">
+              <a href="simulator.html" class="dropdown-link" style="color: var(--primary);">
+                <i class="fa-solid fa-laptop-code"></i> Live Demo Simulator
+              </a>
+            </li>
+          </ul>
+        </li>
         <li><a href="#why-us" class="nav-link">Why Us</a></li>
         <li><a href="#faq" class="nav-link">FAQ</a></li>
         <li><a href="#contact" class="nav-link">Contact</a></li>
@@ -182,6 +203,9 @@
           <h3>Image to PDF Converter</h3>
           <p>Convert JPG, PNG, or WEBP photos into a neat PDF document. Flexibly adjust page order, paper sizes
             (A4, Letter), and orientation.</p>
+          <button class="feature-preview-btn lightbox-trigger" data-img="assets/images/feat_img_to_pdf.png" data-caption="PixaPDF — Image to PDF Screen Preview">
+            <i class="fa-solid fa-expand"></i> Preview Screen
+          </button>
         </div>
 
         <!-- Feature 2 -->
@@ -205,6 +229,9 @@
           <h3>OCR Text Extractor (AI Scan)</h3>
           <p>Scan text from photos or PDF pages and convert them into raw editable text that can be copied or
             saved as TXT.</p>
+          <button class="feature-preview-btn lightbox-trigger" data-img="assets/images/feat_ocr_text.png" data-caption="PixaPDF — OCR Text Extractor Screen Preview">
+            <i class="fa-solid fa-expand"></i> Preview Screen
+          </button>
         </div>
 
         <!-- Feature 5 -->
@@ -226,45 +253,89 @@
   </section>
 
   <!-- ==========================================
-       INTERACTIVE TOOL SIMULATOR DEMO
+       APP FEATURE SHOWCASE SECTION (SCREENSHOT GALLERY)
        ========================================== -->
-  <section class="section bg-surface" id="simulator">
+  <section class="section showcase-section" id="showcase">
     <div class="container">
       <div class="text-center">
-        <div class="section-badge"><i class="fa-solid fa-laptop-code"></i> Live Interactive Demo</div>
-        <h2 class="section-title">Try PixaPDF Simulator in Your Browser</h2>
+        <div class="section-badge"><i class="fa-solid fa-mobile-screen-button"></i> Mobile UI Showcase</div>
+        <h2 class="section-title">See PixaPDF In Action</h2>
         <p class="section-subtitle">
-          Experience the speed of Image to PDF & OCR text extraction directly below.
+          Designed with a clean, intuitive, and modern user interface for effortless mobile document processing.
         </p>
       </div>
 
-      <div class="simulator-box" style="max-width: 850px; margin: 0 auto;">
-        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem; flex-wrap: wrap; gap: 0.5rem;">
-          <span style="font-size: 0.85rem; font-weight: 700; color: var(--text-muted);"><i class="fa-solid fa-bolt" style="color: var(--primary);"></i> Real Browser Engine</span>
-          <span id="trialCounterBadge" style="font-size: 0.85rem; font-weight: 700; background: rgba(255, 59, 48, 0.12); color: var(--primary); padding: 0.35rem 0.85rem; border-radius: 20px; border: 1px solid rgba(255, 59, 48, 0.25);">
-            <i class="fa-solid fa-sparkles"></i> Interactive Browser Demo
-          </span>
+      <div class="showcase-grid">
+        <!-- Showcase Item 1: Image to PDF -->
+        <div class="showcase-card">
+          <div class="showcase-info">
+            <div class="showcase-badge"><i class="fa-solid fa-file-pdf"></i> Core Feature</div>
+            <h3>Image to PDF Converter</h3>
+            <p>Select multiple images from your mobile gallery, easily organize page order, set PDF margins, page sizes (A4, Letter, Custom), and export instantly without watermarks.</p>
+            <ul class="showcase-highlights">
+              <li><i class="fa-solid fa-circle-check"></i> Multi-image batch selection</li>
+              <li><i class="fa-solid fa-circle-check"></i> Auto paper orientation & crop</li>
+              <li><i class="fa-solid fa-circle-check"></i> 100% Offline & zero data sent</li>
+            </ul>
+            <button class="btn btn-secondary lightbox-trigger" data-img="assets/images/feat_img_to_pdf.png" data-caption="PixaPDF Image to PDF Conversion Screen">
+              <i class="fa-solid fa-magnifying-glass-plus"></i> View Full Screen
+            </button>
+          </div>
+          <div class="showcase-visual lightbox-trigger" data-img="assets/images/feat_img_to_pdf.png" data-caption="PixaPDF Image to PDF Conversion Screen">
+            <div class="phone-frame">
+              <div class="phone-camera-notch"></div>
+              <img src="assets/images/feat_img_to_pdf.png" alt="PixaPDF Image to PDF Interface Screenshot" class="showcase-img">
+              <div class="glass-overlay">
+                <span><i class="fa-solid fa-expand"></i> Click to Enlarge</span>
+              </div>
+            </div>
+          </div>
         </div>
 
-        <div class="simulator-tabs">
-          <button class="sim-tab active" id="tabImgToPdf">
-            <i class="fa-solid fa-file-pdf"></i> Image to PDF Demo
-          </button>
-          <button class="sim-tab" id="tabOcr">
-            <i class="fa-solid fa-eye"></i> OCR Text Scanner Demo
-          </button>
+        <!-- Showcase Item 2: OCR Text Extractor -->
+        <div class="showcase-card reverse">
+          <div class="showcase-info">
+            <div class="showcase-badge accent"><i class="fa-solid fa-wand-magic-sparkles"></i> AI Powered</div>
+            <h3>OCR Text Extractor (Smart AI)</h3>
+            <p>Turn physical printed documents, notes, receipts, or images into digital editable text. Copy extracted text to your clipboard or share with one click.</p>
+            <ul class="showcase-highlights">
+              <li><i class="fa-solid fa-circle-check"></i> High precision text recognition</li>
+              <li><i class="fa-solid fa-circle-check"></i> Instant copy to clipboard</li>
+              <li><i class="fa-solid fa-circle-check"></i> Works completely offline</li>
+            </ul>
+            <button class="btn btn-secondary lightbox-trigger" data-img="assets/images/feat_ocr_text.png" data-caption="PixaPDF OCR Text Extractor Screen">
+              <i class="fa-solid fa-magnifying-glass-plus"></i> View Full Screen
+            </button>
+          </div>
+          <div class="showcase-visual lightbox-trigger" data-img="assets/images/feat_ocr_text.png" data-caption="PixaPDF OCR Text Extractor Screen">
+            <div class="phone-frame">
+              <div class="phone-camera-notch"></div>
+              <img src="assets/images/feat_ocr_text.png" alt="PixaPDF OCR Text Scanner Interface Screenshot" class="showcase-img">
+              <div class="glass-overlay">
+                <span><i class="fa-solid fa-expand"></i> Click to Enlarge</span>
+              </div>
+            </div>
+          </div>
         </div>
+      </div>
+    </div>
+  </section>
 
-        <input type="file" id="simFileInput" accept="image/*" style="display: none;">
-
-        <div class="sim-dropzone" id="simDropzone">
-          <i class="fa-solid fa-cloud-arrow-up"></i>
-          <h4 style="font-size: 1.15rem; font-weight: 700; margin-bottom: 0.35rem;">Select or Drag Photos Here</h4>
-          <p style="color: var(--text-muted); font-size: 0.9rem;">Supports JPG, PNG, WEBP (Local Processing Simulation)</p>
-        </div>
-
-        <div class="sim-preview-area" id="simPreviewArea">
-          <div id="simResultContent"></div>
+  <!-- ==========================================
+       LIVE DEMO TEASER SECTION (HOME)
+       ========================================== -->
+  <section class="section bg-surface" id="simulator">
+    <div class="container text-center">
+      <div style="background: var(--bg-card); border: 1px solid var(--border-glow); padding: 3.5rem 2rem; border-radius: var(--radius-lg); box-shadow: var(--shadow-lg); max-width: 900px; margin: 0 auto; position: relative; overflow: hidden;">
+        <div class="section-badge"><i class="fa-solid fa-laptop-code"></i> Live Browser Demo</div>
+        <h2 class="section-title">Try PixaPDF Simulator in Your Browser</h2>
+        <p class="section-subtitle" style="margin-bottom: 2rem;">
+          Test real client-side Image to PDF conversion and AI OCR text extraction directly on our standalone interactive simulator page.
+        </p>
+        <div style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
+          <a href="simulator.html" class="btn btn-primary" style="padding: 0.85rem 2.25rem; font-size: 1.05rem;">
+            <i class="fa-solid fa-rocket"></i> Open Interactive Simulator Page &rarr;
+          </a>
         </div>
       </div>
     </div>
@@ -505,7 +576,7 @@
             <li><a href="#home">Home</a></li>
             <li><a href="#about">About PixaPDF</a></li>
             <li><a href="#features">Main Features</a></li>
-            <li><a href="#simulator">Online Simulator</a></li>
+            <li><a href="simulator.html">Online Simulator</a></li>
             <li><a href="#download">Download Play Store</a></li>
           </ul>
         </div>
@@ -535,6 +606,18 @@
       </div>
     </div>
   </footer>
+
+  <!-- Lightbox Image Modal -->
+  <div class="lightbox-modal" id="lightboxModal">
+    <div class="lightbox-overlay"></div>
+    <div class="lightbox-content">
+      <button class="lightbox-close" id="lightboxClose" aria-label="Close Lightbox">&times;</button>
+      <div class="lightbox-img-wrapper">
+        <img src="" alt="Full Screen Feature Screenshot" id="lightboxImg">
+      </div>
+      <div class="lightbox-caption" id="lightboxCaption">PixaPDF Feature Preview</div>
+    </div>
+  </div>
 
   <!-- Main JavaScript File -->
   <script src="js/main.js"></script>

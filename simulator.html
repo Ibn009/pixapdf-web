@@ -1,0 +1,270 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Live Interactive Web Simulator — PixaPDF | Official Website</title>
+  <meta name="description"
+    content="Try PixaPDF Interactive Simulator live in your browser! Convert photos to PDF or extract text using AI OCR offline in your local browser memory.">
+  <meta name="keywords"
+    content="PixaPDF Simulator, Online Image to PDF, Browser OCR Scanner, PixaPDF Demo, Test PixaPDF">
+
+  <!-- Open Graph / Social Media -->
+  <meta property="og:title" content="PixaPDF Web Simulator — Try PDF Tools Free in Browser">
+  <meta property="og:description"
+    content="Experience the speed of PixaPDF Image to PDF & OCR text extraction directly in your browser. No server upload required.">
+  <meta property="og:image" content="assets/images/hero_mockup.png">
+  <meta property="og:type" content="website">
+
+  <!-- Font Awesome Icons, Tesseract.js OCR & Custom Stylesheet -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5/dist/tesseract.min.js"></script>
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="shortcut icon" href="assets/images/pixa_pdf_logo.png" type="image/png">
+</head>
+
+<body>
+
+  <!-- ==========================================
+       HEADER & NAVIGATION
+       ========================================== -->
+  <header class="header scrolled" id="mainHeader">
+    <div class="container nav-container">
+      <a href="index.html#home" class="logo-brand">
+        <img src="assets/images/pixa_pdf_logo.png" alt="PixaPDF Logo Icon">
+        <span>Pixa<span class="gradient-text">PDF</span></span>
+      </a>
+
+      <ul class="nav-menu" id="navMenu">
+        <li><a href="index.html#home" class="nav-link">Home</a></li>
+        <li><a href="index.html#about" class="nav-link">About</a></li>
+        <li class="nav-dropdown open" id="featuresDropdown">
+          <a href="index.html#features" class="nav-link dropdown-toggle active">
+            Features <i class="fa-solid fa-chevron-down dropdown-chevron"></i>
+          </a>
+          <ul class="dropdown-menu">
+            <li class="dropdown-item">
+              <a href="index.html#features" class="dropdown-link">
+                <i class="fa-solid fa-cubes"></i> Key Features
+              </a>
+            </li>
+            <li class="dropdown-item">
+              <a href="index.html#showcase" class="dropdown-link">
+                <i class="fa-solid fa-mobile-screen-button"></i> Mobile Showcase
+              </a>
+            </li>
+            <li class="dropdown-item">
+              <a href="simulator.html" class="dropdown-link" style="color: var(--primary); font-weight: 700;">
+                <i class="fa-solid fa-laptop-code"></i> Live Demo Simulator
+              </a>
+            </li>
+          </ul>
+        </li>
+        <li><a href="index.html#why-us" class="nav-link">Why Us</a></li>
+        <li><a href="index.html#faq" class="nav-link">FAQ</a></li>
+        <li><a href="index.html#contact" class="nav-link">Contact</a></li>
+      </ul>
+
+      <div class="nav-actions">
+        <button class="theme-btn" id="themeToggleBtn" title="Switch Theme">
+          <i class="fa-solid fa-sun"></i>
+        </button>
+
+        <button class="mobile-toggle" id="mobileMenuToggle" aria-label="Toggle Navigation">
+          <i class="fa-solid fa-bars"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ==========================================
+       SIMULATOR HERO SECTION
+       ========================================== -->
+  <section class="section" style="padding-top: 140px; padding-bottom: 3rem;">
+    <div class="container text-center">
+      <div class="section-badge"><i class="fa-solid fa-laptop-code"></i> Standalone Interactive Demo</div>
+      <h1 class="section-title">Test PixaPDF In Your Browser</h1>
+      <p class="section-subtitle">
+        Try our core features live right now! Convert image files to real PDF documents or extract text using AI OCR with 100% privacy and zero server uploads.
+      </p>
+
+      <!-- Back to main site link -->
+      <a href="index.html" class="btn btn-secondary" style="margin-bottom: 2rem;">
+        <i class="fa-solid fa-arrow-left"></i> Back to Main Landing Page
+      </a>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       INTERACTIVE TOOL SIMULATOR DEMO
+       ========================================== -->
+  <section class="section bg-surface" id="simulator">
+    <div class="container">
+      <div class="text-center">
+        <div class="section-badge"><i class="fa-solid fa-laptop-code"></i> Live Interactive Demo</div>
+        <h2 class="section-title">Try PixaPDF Simulator in Your Browser</h2>
+        <p class="section-subtitle">
+          Experience the speed of Image to PDF & OCR text extraction directly below.
+        </p>
+      </div>
+
+      <div class="simulator-box" style="max-width: 850px; margin: 0 auto;">
+        <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1.25rem; flex-wrap: wrap; gap: 0.5rem;">
+          <span style="font-size: 0.85rem; font-weight: 700; color: var(--text-muted);"><i class="fa-solid fa-bolt" style="color: var(--primary);"></i> Real Browser Engine</span>
+          <span id="trialCounterBadge" style="font-size: 0.85rem; font-weight: 700; background: rgba(255, 59, 48, 0.12); color: var(--primary); padding: 0.35rem 0.85rem; border-radius: 20px; border: 1px solid rgba(255, 59, 48, 0.25);">
+            <i class="fa-solid fa-sparkles"></i> Interactive Browser Demo
+          </span>
+        </div>
+
+        <div class="simulator-tabs">
+          <button class="sim-tab active" id="tabImgToPdf">
+            <i class="fa-solid fa-file-pdf"></i> Image to PDF Demo
+          </button>
+          <button class="sim-tab" id="tabOcr">
+            <i class="fa-solid fa-eye"></i> OCR Text Scanner Demo
+          </button>
+        </div>
+
+        <input type="file" id="simFileInput" accept="image/*" style="display: none;">
+
+        <div class="sim-dropzone" id="simDropzone">
+          <i class="fa-solid fa-cloud-arrow-up"></i>
+          <h4 style="font-size: 1.15rem; font-weight: 700; margin-bottom: 0.35rem;">Select or Drag Photos Here</h4>
+          <p style="color: var(--text-muted); font-size: 0.9rem;">Supports JPG, PNG, WEBP (Local Processing Simulation)</p>
+        </div>
+
+        <div class="sim-preview-area" id="simPreviewArea">
+          <div id="simResultContent"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ==========================================
+       SECURITY & ADVANTAGES OF SIMULATOR
+       ========================================== -->
+  <section class="section" id="simulator-info">
+    <div class="container">
+      <div class="text-center">
+        <div class="section-badge"><i class="fa-solid fa-shield-check"></i> Security & Performance</div>
+        <h2 class="section-title">How PixaPDF Web Simulator Works</h2>
+        <p class="section-subtitle">
+          Experience total transparency: No hidden server processing or tracking.
+        </p>
+      </div>
+
+      <div class="advantages-grid">
+        <div class="adv-item">
+          <div class="adv-icon"><i class="fa-solid fa-lock"></i></div>
+          <div class="adv-info">
+            <h4>100% Client-Side Privacy</h4>
+            <p>Your uploaded photo stays entirely inside your web browser's RAM memory and is never uploaded to any remote server.</p>
+          </div>
+        </div>
+
+        <div class="adv-item">
+          <div class="adv-icon"><i class="fa-solid fa-file-pdf"></i></div>
+          <div class="adv-info">
+            <h4>Real Binary PDF Engine</h4>
+            <p>Our browser engine compiles real ISO-compliant standard PDF documents ready to open on any PDF viewer.</p>
+          </div>
+        </div>
+
+        <div class="adv-item">
+          <div class="adv-icon"><i class="fa-solid fa-mobile-screen"></i></div>
+          <div class="adv-info">
+            <h4>Unlock Full Android App</h4>
+            <p>Want unlimited offline conversions, multi-page PDF batching, digital signatures, and PDF merge? Download PixaPDF on Google Play.</p>
+          </div>
+        </div>
+      </div>
+
+      <!-- Playstore CTA -->
+      <div style="margin-top: 3.5rem; text-align: center;">
+        <a href="https://play.google.com/store/apps/details?id=com.onewanta.files_tools" target="_blank"
+          class="playstore-badge" style="display: inline-flex; padding: 0.85rem 2rem;">
+          <svg viewBox="0 0 512 512" fill="currentColor" style="width: 32px; height: 32px;">
+            <path
+              d="M99.617 8.057a50.091 50.091 0 00-38.867 18.24L267.143 256 60.75 485.703a50.08 50.08 0 0038.867 18.24 50.04 50.04 0 0021.054-4.606l270.932-135.466 2.378-1.189L120.67 12.663a50.05 50.05 0 00-21.053-4.606zM32.8 38.35A49.88 49.88 0 0016 74.07v363.86c0 14.15 5.92 26.92 16.8 35.72L235.8 256 32.8 38.35zm389.043 189.624l-48.435-24.218L298.49 256l74.918 52.244 48.435-24.218c18.57-9.285 30.157-27.818 30.157-48.051s-11.587-38.766-30.157-48.051z" />
+          </svg>
+          <div class="playstore-text">
+            <span style="font-size: 0.75rem;">GET UNLIMITED ON</span>
+            <span style="font-size: 1.25rem;">Google Play Store</span>
+          </div>
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ==========================================
+       FOOTER
+       ========================================== -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-col brand-col">
+          <a href="index.html#home" class="logo-brand">
+            <img src="assets/images/pixa_pdf_logo.png" alt="PixaPDF Logo">
+            <span>Pixa<span class="gradient-text">PDF</span></span>
+          </a>
+          <p>
+            Your complete offline PDF toolkit app. Fast, lightweight, and 100% private.
+          </p>
+        </div>
+
+        <div class="footer-col">
+          <h4>Quick Navigation</h4>
+          <ul class="footer-links">
+            <li><a href="index.html#home">Home</a></li>
+            <li><a href="index.html#about">About PixaPDF</a></li>
+            <li><a href="index.html#features">Main Features</a></li>
+            <li><a href="index.html#showcase">Mobile Showcase</a></li>
+            <li><a href="simulator.html">Online Simulator</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Policy & Legal</h4>
+          <ul class="footer-links">
+            <li><a href="privacy.html" target="_blank">Privacy Policy</a></li>
+            <li><a href="terms.html" target="_blank">Terms of Service</a></li>
+            <li><a href="app-ads-info.html" target="_blank">Google app-ads.txt (Page)</a></li>
+            <li><a href="app-ads.txt" target="_blank">Google app-ads.txt (Raw File)</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Support & Contact</h4>
+          <p style="font-size: 0.9rem; margin-bottom: 0.75rem;"><i class="fa-solid fa-envelope"
+              style="color: var(--primary);"></i> pixapdf.one@gmail.com</p>
+          <p style="font-size: 0.9rem;"><i class="fa-brands fa-google-play" style="color: var(--accent-teal);"></i>
+            Android Version: 1.0.0+</p>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <p>&copy; 2026 PixaPDF — All Rights Reserved.</p>
+        <p>Crafted with heart to accompany and simplify your everyday journey.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Lightbox Image Modal -->
+  <div class="lightbox-modal" id="lightboxModal">
+    <div class="lightbox-overlay"></div>
+    <div class="lightbox-content">
+      <button class="lightbox-close" id="lightboxClose" aria-label="Close Lightbox">&times;</button>
+      <div class="lightbox-img-wrapper">
+        <img src="" alt="Full Screen Feature Screenshot" id="lightboxImg">
+      </div>
+      <div class="lightbox-caption" id="lightboxCaption">PixaPDF Feature Preview</div>
+    </div>
+  </div>
+
+  <!-- Main JavaScript File -->
+  <script src="js/main.js"></script>
+</body>
+
+</html>

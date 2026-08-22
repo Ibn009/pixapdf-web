@@ -175,7 +175,7 @@
         <div class="adv-item">
           <div class="adv-icon"><i class="fa-solid fa-microchip"></i></div>
           <div class="adv-info">
-            <h4>Smart AI OCR Technology</h4>
+            <h4>Smart OCR Technology</h4>
             <p>Extract handwriting or text from images into digital text that you can copy instantly.</p>
           </div>
         </div>
@@ -302,8 +302,8 @@
         <!-- Showcase Item 2: OCR Text Extractor -->
         <div class="showcase-card reverse">
           <div class="showcase-info">
-            <div class="showcase-badge accent"><i class="fa-solid fa-wand-magic-sparkles"></i> AI Powered</div>
-            <h3>OCR Text Extractor (Smart AI)</h3>
+            <div class="showcase-badge accent"><i class="fa-solid fa-wand-magic-sparkles"></i>Smart Powered</div>
+            <h3>OCR Text Extractor</h3>
             <p>Turn physical printed documents, notes, receipts, or images into digital editable text. Copy extracted
               text to your clipboard or share with one click.</p>
             <ul class="showcase-highlights">
@@ -342,7 +342,7 @@
         <div class="section-badge"><i class="fa-solid fa-laptop-code"></i> Live Browser Demo</div>
         <h2 class="section-title">Try PixaPDF Simulator in Your Browser</h2>
         <p class="section-subtitle" style="margin-bottom: 2rem;">
-          Test real client-side Image to PDF conversion and AI OCR text extraction directly on our standalone
+          Test real client-side Image to PDF conversion and OCR text extraction directly on our standalone
           interactive simulator page.
         </p>
         <div style="display: flex; justify-content: center; gap: 1rem; flex-wrap: wrap;">
@@ -490,7 +490,7 @@
             <i class="fa-solid fa-chevron-down"></i>
           </div>
           <div class="faq-body">
-            The OCR feature uses local AI intelligence to detect text characters in photos or scanned documents,
+            The OCR feature uses intelligence to detect text characters in photos or scanned documents,
             converting them into plain text that you can freely copy.
           </div>
         </div>
@@ -546,24 +546,28 @@
           </div>
         </div>
 
-        <form class="contact-form" id="contactForm">
+        <form class="contact-form" id="contactForm" action="https://formsubmit.co/support.pixapdf@pixapdfhub.com" method="POST">
+          <input type="hidden" name="_subject" value="New Contact Message from PixaPDF Website">
+          <input type="hidden" name="_template" value="table">
+          <input type="hidden" name="_captcha" value="false">
+
           <div class="form-group">
             <label for="contactName">Full Name</label>
-            <input type="text" id="contactName" class="form-control" placeholder="Enter your name" required>
+            <input type="text" id="contactName" name="name" class="form-control" placeholder="Enter your name" required>
           </div>
 
           <div class="form-group">
             <label for="contactEmail">Your Email</label>
-            <input type="email" id="contactEmail" class="form-control" placeholder="example@email.com" required>
+            <input type="email" id="contactEmail" name="email" class="form-control" placeholder="example@email.com" required>
           </div>
 
           <div class="form-group">
             <label for="contactMessage">Message or Question</label>
-            <textarea id="contactMessage" class="form-control" rows="4"
+            <textarea id="contactMessage" name="message" class="form-control" rows="4"
               placeholder="Write your message or feedback here..." required></textarea>
           </div>
 
-          <button type="submit" class="btn btn-primary">
+          <button type="submit" class="btn btn-primary" id="contactSubmitBtn">
             <i class="fa-solid fa-paper-plane"></i> Send Message
           </button>
         </form>

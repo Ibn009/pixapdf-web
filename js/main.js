@@ -30,7 +30,7 @@ function initThemeToggle() {
   themeBtn.addEventListener('click', () => {
     const activeTheme = document.documentElement.getAttribute('data-theme');
     const newTheme = activeTheme === 'dark' ? 'light' : 'dark';
-    
+
     document.documentElement.setAttribute('data-theme', newTheme);
     localStorage.setItem('pixapdf_theme', newTheme);
     updateThemeIcon(themeBtn, newTheme);
@@ -124,7 +124,7 @@ function initNavDropdown() {
  * -------------------------------------------------- */
 function initFAQAccordion() {
   const faqHeaders = document.querySelectorAll('.faq-header');
-  
+
   faqHeaders.forEach(header => {
     header.addEventListener('click', () => {
       const parent = header.parentElement;
@@ -248,7 +248,7 @@ function initSimulator() {
         </div>
         <h3 style="font-size: 1.4rem; font-weight: 800; margin-bottom: 0.5rem; color: var(--text-main);">Unlock Unlimited PDF Powers on Android!</h3>
         <p style="color: var(--text-muted); font-size: 0.98rem; max-width: 540px; margin: 0 auto 1.5rem auto; line-height: 1.6;">
-          Loved the browser preview? Download the full <strong>PixaPDF App</strong> on Google Play Store to experience <strong>unlimited offline PDF conversion, document scanning, digital signatures, and AI OCR</strong> with zero restrictions!
+          Loved the browser preview? Download the full <strong>PixaPDF App</strong> on Google Play Store to experience <strong>unlimited offline PDF conversion, document scanning, digital signatures, and OCR</strong> with zero restrictions!
         </p>
         <a href="https://play.google.com/store/apps/details?id=com.onewanta.files_tools" target="_blank" class="playstore-badge" style="display: inline-flex; padding: 0.85rem 2rem;">
           <svg viewBox="0 0 512 512" fill="currentColor" style="width: 28px; height: 28px;">
@@ -325,7 +325,7 @@ function initSimulator() {
         simResultContent.innerHTML = `
           <div style="text-align: center; padding: 1.5rem;">
             <i class="fa-solid fa-spinner fa-spin" style="font-size: 2rem; color: var(--primary);"></i>
-            <p style="margin-top: 0.75rem; font-weight: 700; color: var(--text-main);" id="ocrStatusText">Initializing PixaPDF AI OCR Engine...</p>
+            <p style="margin-top: 0.75rem; font-weight: 700; color: var(--text-main);" id="ocrStatusText">Initializing PixaPDF OCR Engine...</p>
             <div style="width: 100%; max-width: 320px; height: 8px; background: rgba(255,255,255,0.1); border-radius: 4px; margin: 1rem auto 0 auto; overflow: hidden; border: 1px solid var(--border-color);">
               <div id="ocrProgressBar" style="width: 15%; height: 100%; background: var(--primary-gradient); transition: width 0.2s ease;"></div>
             </div>
@@ -354,7 +354,7 @@ function initSimulator() {
         ).then(({ data: { text } }) => {
           let extractedText = (text || '').trim();
           if (!extractedText || extractedText.length === 0) {
-            extractedText = `[PixaPDF AI OCR Scan Result]\nFile Name: ${file.name}\nResolution: Image loaded successfully.\n\nNote: No readable text characters were detected in this specific image. Please select an image containing clear printed text, document scan, or receipt.`;
+            extractedText = `[PixaPDF OCR Scan Result]\nFile Name: ${file.name}\nResolution: Image loaded successfully.\n\nNote: No readable text characters were detected in this specific image. Please select an image containing clear printed text, document scan, or receipt.`;
           }
 
           renderOcrSuccess(extractedText, file.name);
@@ -375,7 +375,7 @@ function initSimulator() {
           <div style="background: var(--bg-surface); padding: 1.5rem; border-radius: var(--radius-md); border: 1px solid var(--border-glow); text-align: left;">
             <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 1rem; flex-wrap: wrap; gap: 0.5rem;">
               <strong style="color: var(--primary); font-size: 0.98rem;">
-                <i class="fa-solid fa-microchip"></i> Real AI OCR Extracted Text (${fileName}):
+                <i class="fa-solid fa-microchip"></i> Real OCR Extracted Text (${fileName}):
               </strong>
               <div style="display: flex; gap: 0.5rem;">
                 <button class="btn btn-secondary" id="copyOcrTextBtn" style="padding: 0.35rem 0.85rem; font-size: 0.85rem;">
@@ -444,7 +444,7 @@ function initSimulator() {
             const cleanName = imageFile.name.replace(/[-_]/g, ' ').replace(/\.[^/.]+$/, "");
 
             const resultText = `[PixaPDF Client-Side OCR Scanner]\nDocument Name: ${cleanName}\nFile Type: ${imageFile.type}\nDimensions: ${img.width} x ${img.height} px\nText Density Score: ${darkRatio}%\n\nExtracted Content:\n"PixaPDF OCR Scanner detected document layout for ${cleanName}. High-contrast text areas scanned locally in browser memory."`;
-            
+
             callback(resultText);
           };
           img.src = e.target.result;
@@ -485,7 +485,7 @@ function createRealPdfFromImage(file, callback) {
       const obj3 = `3 0 obj\n<< /Type /Page /Parent 2 0 R /MediaBox [0 0 ${pdfW} ${pdfH}] /Resources << /XObject << /Im1 4 0 R >> >> /Contents 5 0 R >>\nendobj\n`;
       const obj4Head = `4 0 obj\n<< /Type /XObject /Subtype /Image /Width ${img.width} /Height ${img.height} /ColorSpace /DeviceRGB /BitsPerComponent 8 /Filter /DCTDecode /Length ${imgLen} >>\nstream\n`;
       const obj4Tail = `\nendstream\nendobj\n`;
-      
+
       const contentStr = `q ${pdfW} 0 0 ${pdfH} 0 0 cm /Im1 Do Q`;
       const obj5 = `5 0 obj\n<< /Length ${contentStr.length} >>\nstream\n${contentStr}\nendstream\nendobj\n`;
 
@@ -549,7 +549,7 @@ function initAdsTxtCopy() {
 }
 
 /* --------------------------------------------------
- * 7. Contact Form Handling
+ * 7. Contact Form Handling (Real Email to support.pixapdf@pixapdfhub.com)
  * -------------------------------------------------- */
 function initContactForm() {
   const form = document.getElementById('contactForm');
@@ -557,8 +557,65 @@ function initContactForm() {
 
   form.addEventListener('submit', (e) => {
     e.preventDefault();
-    showToast('Your message has been sent! The PixaPDF team will respond via email.');
-    form.reset();
+
+    const nameInput = document.getElementById('contactName');
+    const emailInput = document.getElementById('contactEmail');
+    const messageInput = document.getElementById('contactMessage');
+    const submitBtn = form.querySelector('button[type="submit"]');
+
+    const name = nameInput ? nameInput.value.trim() : '';
+    const email = emailInput ? emailInput.value.trim() : '';
+    const message = messageInput ? messageInput.value.trim() : '';
+
+    if (!name || !email || !message) {
+      showToast('Please fill in all required fields.');
+      return;
+    }
+
+    const originalBtnText = submitBtn.innerHTML;
+    submitBtn.disabled = true;
+    submitBtn.innerHTML = '<i class="fa-solid fa-spinner fa-spin"></i> Sending...';
+
+    const formData = {
+      name: name,
+      email: email,
+      message: message,
+      _subject: `[PixaPDF Contact] New Message from ${name}`,
+      _template: 'table',
+      _captcha: 'false'
+    };
+
+    fetch('https://formsubmit.co/ajax/support.pixapdf@pixapdfhub.com', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json'
+      },
+      body: JSON.stringify(formData)
+    })
+      .then(response => response.json())
+      .then(data => {
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = originalBtnText;
+
+        if (data.success === 'true' || data.success === true || (data.message && data.message.includes('success'))) {
+          showToast('Thank you! Your message has been sent to support.pixapdf@pixapdfhub.com');
+          form.reset();
+        } else {
+          showToast('Message sent! Please check your email inbox to confirm if requested.');
+          form.reset();
+        }
+      })
+      .catch(error => {
+        console.warn('FormSubmit AJAX error, falling back to mailto client:', error);
+        submitBtn.disabled = false;
+        submitBtn.innerHTML = originalBtnText;
+
+        const mailtoUrl = `mailto:support.pixapdf@pixapdfhub.com?subject=${encodeURIComponent(`[PixaPDF Contact] Message from ${name}`)}&body=${encodeURIComponent(`Name: ${name}\nEmail: ${email}\n\nMessage:\n${message}`)}`;
+        window.location.href = mailtoUrl;
+        showToast('Opening your email app to send message to support.pixapdf@pixapdfhub.com');
+        form.reset();
+      });
   });
 }
 

@@ -14,6 +14,7 @@ document.addEventListener('DOMContentLoaded', () => {
   initAdsTxtCopy();
   initContactForm();
   initLightbox();
+  initTouchZoomLock();
 });
 
 /* --------------------------------------------------
@@ -706,5 +707,42 @@ function initLightbox() {
       closeModal();
     }
   });
+}
+
+/* --------------------------------------------------
+ * 10. Lock Touch Pinch Zoom & Double Tap Zoom on Smartphones
+ * -------------------------------------------------- */
+function initTouchZoomLock() {
+  // Prevent Safari / iOS gesture pinch zoom
+  document.addEventListener('gesturestart', (e) => {
+    e.preventDefault();
+  }, { passive: false });
+
+  document.addEventListener('gesturechange', (e) => {
+    e.preventDefault();
+  }, { passive: false });
+
+  document.addEventListener('gestureend', (e) => {
+    e.preventDefault();
+  }, { passive: false });
+
+  // Prevent multi-touch pinch zoom on Android / Chrome Mobile
+  document.addEventListener('touchmove', (e) => {
+    if (e.touches && e.touches.length > 1) {
+      e.preventDefault();
+    }
+  }, { passive: false });
+
+  // Prevent double-tap zoom
+  let lastTouchEnd = 0;
+  document.addEventListener('touchend', (e) => {
+    const now = (new Date()).getTime();
+    if (now - lastTouchEnd <= 300) {
+      if (!['INPUT', 'TEXTAREA', 'BUTTON', 'A', 'SELECT'].includes(e.target.tagName)) {
+        e.preventDefault();
+      }
+    }
+    lastTouchEnd = now;
+  }, { passive: false });
 }
 

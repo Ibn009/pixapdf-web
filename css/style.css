@@ -68,12 +68,18 @@ html {
   background-color: var(--bg-main);
   color: var(--text-main);
   line-height: 1.6;
+  touch-action: manipulation;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
 }
 
 body {
   overflow-x: hidden;
   min-height: 100vh;
   transition: background-color 0.3s ease, color 0.3s ease;
+  touch-action: manipulation;
+  -webkit-text-size-adjust: 100%;
+  -ms-text-size-adjust: 100%;
 }
 
 a {
@@ -1350,5 +1356,74 @@ img {
   padding: 0.5rem 1.25rem;
   border-radius: var(--radius-full);
   border: 1px solid var(--border-color);
+}
+
+/* ==========================================================================
+   SMARTPHONE FLEXIBLE UI & TOUCH LOCK ENHANCEMENTS
+   ========================================================================== */
+@media (max-width: 576px) {
+  .container {
+    padding: 0 1rem;
+  }
+
+  .hero {
+    padding-top: 100px;
+    padding-bottom: 2rem;
+  }
+
+  .hero h1 {
+    font-size: 1.85rem !important;
+    line-height: 1.25 !important;
+  }
+
+  .hero p, .section-subtitle {
+    font-size: 0.92rem !important;
+  }
+
+  .hero-buttons {
+    flex-direction: column;
+    width: 100%;
+    gap: 0.75rem;
+  }
+
+  .btn, .playstore-badge {
+    width: 100%;
+    justify-content: center;
+    text-align: center;
+    box-sizing: border-box;
+  }
+
+  .phone-frame {
+    width: 250px;
+    max-width: 85vw;
+  }
+
+  .simulator-box {
+    padding: 1.25rem 0.85rem;
+  }
+
+  .simulator-tabs {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .sim-tab {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .contact-form, .contact-info-card {
+    padding: 1.25rem;
+  }
+
+  .footer {
+    padding: 50px 0 25px 0;
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    text-align: center;
+    gap: 0.5rem;
+  }
 }
 

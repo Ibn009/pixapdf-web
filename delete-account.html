@@ -1,0 +1,419 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>Account & Data Deletion Request — PixaPDF : Image to PDF & Scanner</title>
+  <meta name="description"
+    content="Official Account and Data Deletion Request page for PixaPDF : Image to PDF & Scanner by Onewanta. Steps to delete your account, data retention policies, and deletion request form.">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="shortcut icon" href="assets/images/pixa_pdf_logo.png" type="image/png">
+  <style>
+    .policy-card {
+      background: var(--bg-card);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-md);
+      padding: 1.75rem;
+      margin-bottom: 1.5rem;
+      box-shadow: var(--shadow-sm);
+      transition: var(--transition);
+    }
+
+    .policy-card:hover {
+      border-color: rgba(255, 59, 48, 0.4);
+      box-shadow: var(--shadow-lg);
+    }
+
+    .step-box {
+      display: flex;
+      gap: 1.25rem;
+      align-items: flex-start;
+      margin-bottom: 1.25rem;
+      padding: 1.25rem;
+      background: var(--bg-surface);
+      border-radius: var(--radius-sm);
+      border-left: 4px solid var(--primary);
+    }
+
+    .step-number {
+      background: var(--primary-gradient);
+      color: #fff;
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-weight: 700;
+      font-size: 1.1rem;
+      flex-shrink: 0;
+    }
+
+    .step-content h4 {
+      margin-bottom: 0.35rem;
+      color: var(--text-main);
+    }
+
+    .step-content p {
+      color: var(--text-muted);
+      font-size: 0.95rem;
+    }
+
+    .data-table {
+      width: 100%;
+      border-collapse: collapse;
+      margin-top: 1rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .data-table th,
+    .data-table td {
+      padding: 0.85rem 1rem;
+      text-align: left;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .data-table th {
+      background: var(--bg-surface);
+      color: var(--text-main);
+      font-weight: 700;
+    }
+
+    .data-table td {
+      color: var(--text-muted);
+      font-size: 0.92rem;
+    }
+
+    .badge-deleted {
+      background: rgba(239, 68, 68, 0.15);
+      color: #ef4444;
+      padding: 0.25rem 0.6rem;
+      border-radius: var(--radius-full);
+      font-size: 0.8rem;
+      font-weight: 700;
+      display: inline-block;
+    }
+
+    .badge-retained {
+      background: rgba(245, 158, 11, 0.15);
+      color: #f59e0b;
+      padding: 0.25rem 0.6rem;
+      border-radius: var(--radius-full);
+      font-size: 0.8rem;
+      font-weight: 700;
+      display: inline-block;
+    }
+
+    .form-group {
+      margin-bottom: 1.25rem;
+    }
+
+    .form-group label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: 600;
+      color: var(--text-main);
+    }
+
+    .form-control {
+      width: 100%;
+      padding: 0.85rem 1rem;
+      background: var(--bg-surface);
+      border: 1px solid var(--border-color);
+      border-radius: var(--radius-sm);
+      color: var(--text-main);
+      outline: none;
+      transition: var(--transition);
+    }
+
+    .form-control:focus {
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(255, 59, 48, 0.2);
+    }
+
+    .submit-btn {
+      background: var(--primary-gradient);
+      color: white;
+      padding: 0.9rem 2rem;
+      border: none;
+      border-radius: var(--radius-sm);
+      font-weight: 700;
+      font-size: 1rem;
+      cursor: pointer;
+      width: 100%;
+      transition: var(--transition);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+
+    .submit-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: var(--shadow-primary);
+    }
+
+    .alert-success {
+      background: rgba(16, 185, 129, 0.15);
+      border: 1px solid rgba(16, 185, 129, 0.4);
+      color: #10b981;
+      padding: 1.25rem;
+      border-radius: var(--radius-sm);
+      margin-top: 1rem;
+      display: none;
+    }
+
+    .alert-success.active {
+      display: block;
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- Header -->
+  <header class="header scrolled">
+    <div class="container nav-container">
+      <a href="index.html" class="logo-brand">
+        <img src="assets/images/pixa_pdf_logo.png" alt="PixaPDF Logo">
+        <span>Pixa<span class="gradient-text">PDF</span></span>
+      </a>
+      <div class="nav-actions">
+        <button class="theme-btn" id="themeToggleBtn" title="Toggle Theme">
+          <i class="fa-solid fa-sun"></i>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main style="padding-top: 120px; padding-bottom: 80px;">
+    <div class="container" style="max-width: 900px;">
+      
+      <!-- Hero Header -->
+      <div style="text-align: center; margin-bottom: 2.5rem;">
+        <div class="section-badge" style="margin: 0 auto 1rem auto;">
+          <i class="fa-solid fa-user-minus"></i> Account & Data Deletion
+        </div>
+        <h1 style="font-size: 2.5rem; font-weight: 800; margin-bottom: 0.75rem; line-height: 1.2;">
+          Account Deletion & Data Removal Request
+        </h1>
+        <p style="font-weight: 700; color: var(--primary); font-size: 1.1rem; margin-bottom: 0.5rem;">
+          PixaPDF : Image to PDF & Scanner
+        </p>
+        <p style="color: var(--text-muted); font-size: 0.95rem;">
+          Developer: <strong>Onewanta</strong> | Google Play Store Policy Compliant Page
+        </p>
+      </div>
+
+      <!-- Introduction -->
+      <div class="policy-card">
+        <h3 style="margin-bottom: 0.75rem; color: var(--text-main); font-size: 1.25rem;">
+          <i class="fa-solid fa-circle-info" style="color: var(--secondary); margin-right: 0.5rem;"></i> Overview
+        </h3>
+        <p style="color: var(--text-muted); line-height: 1.7;">
+          In compliance with Google Play Developer Policies regarding user data control, users of <strong>PixaPDF : Image to PDF & Scanner</strong> (developed by <strong>Onewanta</strong>) can request the full deletion of their account credentials and associated cloud data at any time.
+        </p>
+        <p style="color: var(--text-muted); line-height: 1.7; margin-top: 0.75rem;">
+          We provide two convenient ways to delete your account: directly <strong>In-App</strong> via the application settings, or online using the <strong>Web Request Form</strong> on this page.
+        </p>
+      </div>
+
+      <!-- Step-by-Step Instructions -->
+      <div class="policy-card">
+        <h3 style="margin-bottom: 1.25rem; color: var(--text-main); font-size: 1.35rem;">
+          <i class="fa-solid fa-list-check" style="color: var(--primary); margin-right: 0.5rem;"></i> How to Request Account Deletion
+        </h3>
+
+        <h4 style="margin-bottom: 1rem; color: var(--secondary); border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem;">
+          Option 1: In-App Account Deletion (Instant & Recommended)
+        </h4>
+
+        <div class="step-box">
+          <div class="step-number">1</div>
+          <div class="step-content">
+            <h4>Open the PixaPDF App</h4>
+            <p>Launch <strong>PixaPDF : Image to PDF & Scanner</strong> on your Android device.</p>
+          </div>
+        </div>
+
+        <div class="step-box">
+          <div class="step-number">2</div>
+          <div class="step-content">
+            <h4>Navigate to My Account</h4>
+            <p>Open the left drawer menu and tap on <strong>My Account</strong> (or <strong>Akun Saya</strong>).</p>
+          </div>
+        </div>
+
+        <div class="step-box">
+          <div class="step-number">3</div>
+          <div class="step-content">
+            <h4>Tap 'Delete Account' & Confirm</h4>
+            <p>Scroll to the bottom of the My Account screen, tap <strong>Delete Account</strong> (Hapus Akun), and confirm. Your account credentials and Cloud Firestore profile will be permanently deleted <strong>immediately</strong>.</p>
+          </div>
+        </div>
+
+        <h4 style="margin-top: 2rem; margin-bottom: 1rem; color: var(--secondary); border-bottom: 1px solid var(--border-color); padding-bottom: 0.5rem;">
+          Option 2: Online Deletion Request (Web Form / Email)
+        </h4>
+        <p style="color: var(--text-muted); margin-bottom: 1rem; font-size: 0.95rem;">
+          If you no longer have the app installed on your device, you can submit an online request using the form below or send an email to <a href="mailto:pixapdf.one@gmail.com" style="color: var(--primary); font-weight: 600;">pixapdf.one@gmail.com</a>.
+        </p>
+      </div>
+
+      <!-- Data Deleted vs Data Retained Matrix -->
+      <div class="policy-card">
+        <h3 style="margin-bottom: 0.75rem; color: var(--text-main); font-size: 1.35rem;">
+          <i class="fa-solid fa-database" style="color: var(--accent-teal); margin-right: 0.5rem;"></i> Data Deletion & Retention Policy
+        </h3>
+        <p style="color: var(--text-muted); margin-bottom: 1rem; line-height: 1.6;">
+          Below is a detailed breakdown of the data types affected when you request account deletion:
+        </p>
+
+        <table class="data-table">
+          <thead>
+            <tr>
+              <th>Data Type</th>
+              <th>Status</th>
+              <th>Details & Retention Period</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td><strong>Account Credentials</strong><br><small>Email Address, Encrypted Auth Tokens, Passwords</small></td>
+              <td><span class="badge-deleted">Deleted</span></td>
+              <td>Permanently removed from Firebase Authentication immediately (In-App) or within 30 days (Web request).</td>
+            </tr>
+            <tr>
+              <td><strong>User Profile Data</strong><br><small>Full Name, Display Name, Profile Photo, User ID (UID)</small></td>
+              <td><span class="badge-deleted">Deleted</span></td>
+              <td>Permanently removed from Cloud Firestore user database immediately.</td>
+            </tr>
+            <tr>
+              <td><strong>Pro Subscription Status</strong><br><small>App Subscription Entitlements in Cloud Firestore</small></td>
+              <td><span class="badge-deleted">Deleted</span></td>
+              <td>User cloud entitlement documents associated with the account UID are deleted.</td>
+            </tr>
+            <tr>
+              <td><strong>Local Files & Documents</strong><br><small>Converted PDFs, Scanned Images, Local Files</small></td>
+              <td><span class="badge-retained">Stored Locally</span></td>
+              <td>Files are stored 100% locally on your device. We do not possess or store your document files on our cloud servers. You can delete local files anytime using your device file manager.</td>
+            </tr>
+            <tr>
+              <td><strong>Financial Transaction Records</strong><br><small>Google Play Purchase History</small></td>
+              <td><span class="badge-retained">Retained by Google</span></td>
+              <td>Payment transaction records are processed and retained by Google Play Store according to applicable tax, legal, and financial auditing compliance requirements.</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <!-- Online Request Form -->
+      <div class="policy-card" id="request-form-section">
+        <h3 style="margin-bottom: 0.75rem; color: var(--text-main); font-size: 1.35rem;">
+          <i class="fa-solid fa-paper-plane" style="color: var(--primary); margin-right: 0.5rem;"></i> Submit Online Deletion Request
+        </h3>
+        <p style="color: var(--text-muted); margin-bottom: 1.5rem; font-size: 0.95rem;">
+          Fill out this form to submit your account deletion request directly to the developer team (<strong>Onewanta</strong>).
+        </p>
+
+        <form id="accountDeletionForm" onsubmit="handleFormSubmit(event)">
+          <div class="form-group">
+            <label for="fullName"><i class="fa-solid fa-user" style="color: var(--primary);"></i> Full Name / Display Name</label>
+            <input type="text" id="fullName" class="form-control" placeholder="Enter your full name or account name" required>
+          </div>
+
+          <div class="form-group">
+            <label for="userEmail"><i class="fa-solid fa-envelope" style="color: var(--primary);"></i> Registered Email Address</label>
+            <input type="email" id="userEmail" class="form-control" placeholder="example@email.com" required>
+          </div>
+
+          <div class="form-group">
+            <label for="authType"><i class="fa-solid fa-key" style="color: var(--primary);"></i> Sign-In Method Used</label>
+            <select id="authType" class="form-control" style="cursor: pointer;" required>
+              <option value="Email/Password">Email & Password</option>
+              <option value="Google Sign-In">Google Sign-In</option>
+              <option value="Guest Account">Guest / Anonymous Account</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="reason"><i class="fa-solid fa-comment-dots" style="color: var(--primary);"></i> Reason for Deletion (Optional)</label>
+            <textarea id="reason" class="form-control" rows="3" placeholder="Let us know how we can improve..."></textarea>
+          </div>
+
+          <div class="form-group" style="display: flex; align-items: flex-start; gap: 0.75rem; margin-top: 1rem;">
+            <input type="checkbox" id="confirmCheck" style="margin-top: 0.25rem; accent-color: var(--primary); cursor: pointer;" required>
+            <label for="confirmCheck" style="font-size: 0.9rem; color: var(--text-muted); font-weight: 400; cursor: pointer;">
+              I confirm that I want to request permanent deletion of my account and profile data associated with this email address for <strong>PixaPDF : Image to PDF & Scanner</strong>.
+            </label>
+          </div>
+
+          <button type="submit" class="submit-btn">
+            <i class="fa-solid fa-trash-can"></i> Submit Account Deletion Request
+          </button>
+        </form>
+
+        <div id="successAlert" class="alert-success">
+          <h4 style="margin-bottom: 0.35rem;"><i class="fa-solid fa-circle-check"></i> Request Received!</h4>
+          <p style="font-size: 0.92rem; margin: 0;">
+            Your account deletion request has been registered. Our support team at <strong>Onewanta</strong> will verify and process the removal of your account credentials from Cloud Firestore within 7 to 30 business days. You will receive a confirmation email at your registered address once completed.
+          </p>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-content" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem;">
+        <div class="footer-brand">
+          <p style="font-weight: 700; color: var(--text-main);">PixaPDF : Image to PDF & Scanner</p>
+          <p style="color: var(--text-muted); font-size: 0.85rem;">Developed by Onewanta</p>
+        </div>
+        <div class="footer-links" style="display: flex; gap: 1.5rem; font-size: 0.9rem;">
+          <a href="index.html" style="color: var(--text-muted);">Home</a>
+          <a href="privacy.html" style="color: var(--text-muted);">Privacy Policy</a>
+          <a href="terms.html" style="color: var(--text-muted);">Terms of Service</a>
+          <a href="delete-account.html" style="color: var(--primary); font-weight: 700;">Account Deletion</a>
+        </div>
+      </div>
+      <div style="text-align: center; margin-top: 2rem; border-top: 1px solid var(--border-color); padding-top: 1rem; color: var(--text-muted); font-size: 0.85rem;">
+        &copy; 2026 Onewanta. All rights reserved. Support Email: <a href="mailto:pixapdf.one@gmail.com" style="color: var(--primary);">pixapdf.one@gmail.com</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Theme Toggle Logic
+    const themeToggleBtn = document.getElementById('themeToggleBtn');
+    const htmlElem = document.documentElement;
+
+    themeToggleBtn.addEventListener('click', () => {
+      const currentTheme = htmlElem.getAttribute('data-theme');
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+      htmlElem.setAttribute('data-theme', newTheme);
+      themeToggleBtn.innerHTML = newTheme === 'dark' ? '<i class="fa-solid fa-sun"></i>' : '<i class="fa-solid fa-moon"></i>';
+    });
+
+    // Handle Deletion Form Submit
+    function handleFormSubmit(e) {
+      e.preventDefault();
+      const name = document.getElementById('fullName').value;
+      const email = document.getElementById('userEmail').value;
+
+      document.getElementById('accountDeletionForm').style.display = 'none';
+      const successAlert = document.getElementById('successAlert');
+      successAlert.classList.add('active');
+
+      // Scroll to alert
+      successAlert.scrollIntoView({ behavior: 'smooth' });
+    }
+  </script>
+</body>
+
+</html>

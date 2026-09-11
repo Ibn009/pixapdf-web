@@ -269,45 +269,60 @@
           <i class="fa-solid fa-database" style="color: var(--accent-teal); margin-right: 0.5rem;"></i> Data Deletion & Retention Policy
         </h3>
         <p style="color: var(--text-muted); margin-bottom: 1rem; line-height: 1.6;">
-          Below is a detailed breakdown of the data types affected when you request account deletion:
+          When you request deletion of your PixaPDF account, the following data is handled as described below:
         </p>
 
-        <table class="data-table">
-          <thead>
-            <tr>
-              <th>Data Type</th>
-              <th>Status</th>
-              <th>Details & Retention Period</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr>
-              <td><strong>Account Credentials</strong><br><small>Email Address, Encrypted Auth Tokens, Passwords</small></td>
-              <td><span class="badge-deleted">Deleted</span></td>
-              <td>Permanently removed from Firebase Authentication immediately (In-App) or within 30 days (Web request).</td>
-            </tr>
-            <tr>
-              <td><strong>User Profile Data</strong><br><small>Full Name, Display Name, Profile Photo, User ID (UID)</small></td>
-              <td><span class="badge-deleted">Deleted</span></td>
-              <td>Permanently removed from Cloud Firestore user database immediately.</td>
-            </tr>
-            <tr>
-              <td><strong>Pro Subscription Status</strong><br><small>App Subscription Entitlements in Cloud Firestore</small></td>
-              <td><span class="badge-deleted">Deleted</span></td>
-              <td>User cloud entitlement documents associated with the account UID are deleted.</td>
-            </tr>
-            <tr>
-              <td><strong>Local Files & Documents</strong><br><small>Converted PDFs, Scanned Images, Local Files</small></td>
-              <td><span class="badge-retained">Stored Locally</span></td>
-              <td>Files are stored 100% locally on your device. We do not possess or store your document files on our cloud servers. You can delete local files anytime using your device file manager.</td>
-            </tr>
-            <tr>
-              <td><strong>Financial Transaction Records</strong><br><small>Google Play Purchase History</small></td>
-              <td><span class="badge-retained">Retained by Google</span></td>
-              <td>Payment transaction records are processed and retained by Google Play Store according to applicable tax, legal, and financial auditing compliance requirements.</td>
-            </tr>
-          </tbody>
-        </table>
+        <div style="overflow-x: auto;">
+          <table class="data-table">
+            <thead>
+              <tr>
+                <th style="min-width: 200px;">Data Type</th>
+                <th style="min-width: 140px;">Status</th>
+                <th style="min-width: 280px;">Details & Retention</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Account Information</strong><br><small style="color: var(--text-muted);">Email address, authentication credentials, and account identifiers</small></td>
+                <td><span class="badge-deleted">Deleted</span></td>
+                <td>Your PixaPDF account information is deleted from Firebase Authentication when the account deletion request is processed.</td>
+              </tr>
+              <tr>
+                <td><strong>User Profile Data</strong><br><small style="color: var(--text-muted);">Full name, display name, profile photo, and PixaPDF user profile</small></td>
+                <td><span class="badge-deleted">Deleted</span></td>
+                <td>Your user profile data stored in Cloud Firestore is permanently deleted when your account is deleted.</td>
+              </tr>
+              <tr>
+                <td><strong>Pro Subscription Entitlement</strong><br><small style="color: var(--text-muted);">PixaPDF subscription status and entitlement data</small></td>
+                <td><span class="badge-deleted">Deleted</span></td>
+                <td>Subscription entitlement records associated with your PixaPDF account are deleted from our database. This does not delete purchase or payment records maintained by Google Play.</td>
+              </tr>
+              <tr>
+                <td><strong>Local Files & Documents</strong><br><small style="color: var(--text-muted);">Converted PDFs, scanned documents, and other locally stored files</small></td>
+                <td><span class="badge-retained">Stored Locally</span></td>
+                <td>Files created or stored locally by PixaPDF remain on your device and are not automatically deleted when you delete your PixaPDF account. You can delete these files at any time using PixaPDF or your device's file manager.</td>
+              </tr>
+              <tr>
+                <td><strong>Google Play Transaction Records</strong><br><small style="color: var(--text-muted);">Purchase and payment-related records</small></td>
+                <td><span class="badge-retained">Retained by Google</span></td>
+                <td>Google Play independently processes and retains transaction records in accordance with Google's policies and applicable tax, legal, accounting, and financial requirements. PixaPDF does not control Google's retention of these records.</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h4 style="margin-top: 1.75rem; margin-bottom: 0.75rem; color: var(--text-main); font-size: 1.15rem; border-top: 1px solid var(--border-color); padding-top: 1.25rem;">
+          <i class="fa-solid fa-shield-halved" style="color: var(--primary); margin-right: 0.5rem;"></i> Important Note About Document Processing
+        </h4>
+        <p style="color: var(--text-muted); line-height: 1.7; margin-bottom: 0.75rem; font-size: 0.95rem;">
+          PixaPDF is designed to keep your documents stored locally on your device whenever possible. Certain features that require server-side processing may temporarily transmit document data to our processing servers to perform the requested operation.
+        </p>
+        <p style="color: var(--text-muted); line-height: 1.7; margin-bottom: 0.75rem; font-size: 0.95rem;">
+          Where applicable, such uploaded data is processed only for the requested operation and is not intended to be retained as a permanent copy after processing is completed, subject to technical logs, security records, and applicable legal requirements.
+        </p>
+        <p style="color: var(--text-main); line-height: 1.7; font-weight: 600; font-size: 0.95rem; margin-bottom: 0;">
+          Deleting your PixaPDF account does not automatically remove files that remain on your device.
+        </p>
       </div>
 
       <!-- Online Request Form -->
